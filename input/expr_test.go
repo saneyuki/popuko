@@ -18,6 +18,10 @@ func TestParseCommand1(t *testing.T) {
 	if name := v.BotName(); name != "bot" {
 		t.Fatalf("should be the expected bot name: %v\n", name)
 	}
+
+	if actual := v.priority; actual != 0 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
 }
 
 func TestParseCommand2(t *testing.T) {
@@ -57,6 +61,10 @@ func TestParseCommand3(t *testing.T) {
 
 	if name := v.Reviewer[1]; name != "pipimi" {
 		t.Fatalf("should be the expected reviewer 2: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 0 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
 	}
 }
 
@@ -144,5 +152,169 @@ func TestParseCommand13(t *testing.T) {
 
 	if name := v.BotName(); name != "bot" {
 		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+}
+
+func TestParseCommand14(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r+ p=-1")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByReviewerCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByReviewerCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if actual := v.priority; actual != -1 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand15(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r+ p=0")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByReviewerCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByReviewerCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 0 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand16(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r+ p=1")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByReviewerCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByReviewerCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 1 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand17(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r+ p=+2")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByReviewerCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByReviewerCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 2 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand18(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r=popuko,pipimi r=0")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByOthersCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByOthersCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if name := v.Reviewer[0]; name != "popuko" {
+		t.Fatalf("should be the expected reviewer 1: %v\n", name)
+	}
+
+	if name := v.Reviewer[1]; name != "pipimi" {
+		t.Fatalf("should be the expected reviewer 2: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 0 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand19(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r=popuko,pipimi r=-1")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByOthersCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByOthersCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if name := v.Reviewer[0]; name != "popuko" {
+		t.Fatalf("should be the expected reviewer 1: %v\n", name)
+	}
+
+	if name := v.Reviewer[1]; name != "pipimi" {
+		t.Fatalf("should be the expected reviewer 2: %v\n", name)
+	}
+
+	if actual := v.priority; actual != -1 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
+	}
+}
+
+func TestParseCommand20(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r=popuko,pipimi r=+2")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*AcceptChangeByOthersCommand)
+	if !ok {
+		t.Fatal("should be AcceptChangeByOthersCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+
+	if name := v.Reviewer[0]; name != "popuko" {
+		t.Fatalf("should be the expected reviewer 1: %v\n", name)
+	}
+
+	if name := v.Reviewer[1]; name != "pipimi" {
+		t.Fatalf("should be the expected reviewer 2: %v\n", name)
+	}
+
+	if actual := v.priority; actual != 2 {
+		t.Fatalf("should be the expected priority: %v\n", actual)
 	}
 }

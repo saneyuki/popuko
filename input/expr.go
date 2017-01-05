@@ -83,7 +83,8 @@ type AcceptChangesetCommand interface {
 }
 
 type AcceptChangeByReviewerCommand struct {
-	botName string
+	botName  string
+	priority int
 }
 
 func (s *AcceptChangeByReviewerCommand) BotName() string {
@@ -93,6 +94,7 @@ func (s *AcceptChangeByReviewerCommand) BotName() string {
 type AcceptChangeByOthersCommand struct {
 	botName  string
 	Reviewer []string
+	priority int
 }
 
 func (s *AcceptChangeByOthersCommand) BotName() string {
