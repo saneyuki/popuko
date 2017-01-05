@@ -103,6 +103,20 @@ func (s *AutoMergeQueue) GetNext() (ok bool, item *AutoMergeQueueItem) {
 	return true, front
 }
 
+func (s *AutoMergeQueue) RemoveAwaiting(pr int) (found bool) {
+	n := make([]*AutoMergeQueueItem, len(s.q)-1) // create small slice huristically
+	for _, item := range s.q {
+		if item.PullRequest == pr {
+			found = true
+		} else {
+			n = append(n, item)
+		}
+	}
+
+	s.q = n
+	return found
+}
+
 func (s *AutoMergeQueue) GetActive() *AutoMergeQueueItem {
 	return s.current
 }

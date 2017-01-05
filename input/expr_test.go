@@ -130,3 +130,19 @@ func TestParseCommand12(t *testing.T) {
 		t.Fatal("should be the expected reviewer")
 	}
 }
+
+func TestParseCommand13(t *testing.T) {
+	ok, cmd := ParseCommand("@bot r-")
+	if !ok {
+		t.Fatal("should be ok")
+	}
+
+	v, ok := cmd.(*RejectChangeByReviewerCommand)
+	if !ok {
+		t.Fatal("should be RejectChangeByReviewerCommand")
+	}
+
+	if name := v.BotName(); name != "bot" {
+		t.Fatalf("should be the expected bot name: %v\n", name)
+	}
+}
