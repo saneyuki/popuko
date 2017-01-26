@@ -1,0 +1,6 @@
+[package]
+name = "popuko"
+version = "0.1.0"
+authors = ["Tetsuharu OHZEKI <saneyuki.snyk@gmail.com>"]
+
+[dependencies]
